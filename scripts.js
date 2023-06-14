@@ -37,40 +37,63 @@ const reducer = (state = currentState, action) => {
   }
 };
 
-// selecting DOM elements
-const counterBadge = document.getElementById("counter");
-const minusButton = document.getElementById("minusButton");
-const plusButton = document.getElementById("plusButton");
-const resetButton = document.getElementById("resetButton");
-
-// updates counter badge with current count
-const updateCounterBadge = (count) => {
-  counterBadge.innerText = count;
-};
-
 /** STORE
  * def: object that holds the application state
  */
 
 // Store
 // creates a new Redux store (createStore function) & updates it using (counterReducer)
-const store = createStore(reducer);
+const createStore = (reducer) => {
+  // subscribe to state changes and update the counter badge
+  let state = reducer(undefined, {}); // initializes state using reducer with empty action
+  const subscribers = []; // array to hold subscribers (callback functions)
 
-// subscribe to state changes and update the counter badge
-store.subscribe(() => {
-  const state = store.getState();
-  updateCounterBadge(state.count);
-});
+  const getState = () => state; // function to get current state
 
-// Dispatch actions based on button clicks
-minusButton.addEventListener("click", () => {
-  store.dispatch(subtractCount());
-});
+  const dispatch = (action) => {
+    // dispatch action
+    state = reducer(state, action); // updates to a new state by calling reducer with current state and the action
+    subscribers.forEach((subscriber) => subscriber()); // notifies all subscribers that the state has changed so the UI can be updated with the new data
+  };
 
-plusButton.addEventListener("click", () => {
-  store.dispatch(addCount());
-});
+  const subscribe = (subscriber) => {
+    subscribers.push(subscriber); // adds subscriber to array
 
-resetButton.addEventListener("click", () => {
-  store.dispatch(resetCount());
-});
+    // return an unsubscribe function that removes the subscriber from the array when called
+    return () => {
+      const index = subscribers.indexOf(subscriber);
+      if (index !== -1) {
+        subscribers.splice(index, 1);
+      }
+    };
+  };
+
+  return { getState, dispatch, subscribe }; // Return an object with the store methods
+};
+
+// Usage
+const store = createStore(reducer); // creates store by passing the reducer)
+
+// Scenario 1: loads current state (before any changes have been made)
+console.log("Scenario 1:");
+console.log("Initial state:", store.getState()); // Get and log the initial state
+// logs count: 0
+
+// Scenario 2: increments the counter by 2
+console.log("Scenario 2:");
+store.dispatch(addCount()); // Dispatch an "ADD" action
+store.dispatch(addCount()); // Dispatch another "ADD" action
+console.log("Current state:", store.getState()); // Get and log the current state
+// logs count: 2
+
+// Scenario 3: decrements the counter by 1
+console.log("Scenario 3:");
+store.dispatch(subtractCount()); // Dispatch a "SUBTRACT" action
+console.log("Current state:", store.getState()); // Get and log the current state
+// logs count: 1
+
+// Scenario 4: resets the counter back to 0
+console.log("Scenario 4:");
+store.dispatch(resetCount()); // Dispatch a "RESET" action
+console.log("Current state:", store.getState()); // Get and log the current state
+// logs count: 0
