@@ -43,7 +43,7 @@ The user stories for this application, written in Gherkin syntax, are as follows
 
 To use the Tally App with Redux-inspired state management:
 
-1. Download the code from the Git repository by clicking on the "Download" button or using the Git clone command:
+1. Download the code from the Git repository by clicking on the "Download" button.
 
 2. Open the downloaded code in Visual Studio Code or your preferred code editor.
 
