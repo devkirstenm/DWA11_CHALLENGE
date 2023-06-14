@@ -39,6 +39,18 @@ The user stories for this application, written in Gherkin syntax, are as follows
    - When a "RESET" action is dispatched
    - Then the state should display a count
 
+## How to Use 🚀
+
+To use the Tally App with Redux-inspired state management:
+
+1. Download the code from the Git repository by clicking on the "Download" button or using the Git clone command:
+
+2. Open the downloaded code in Visual Studio Code or your preferred code editor.
+
+3. Open the console in your web browser.
+
+4. Observe the console output to see the state changes based on the dispatched actions.
+
 ## Technologies Used 🛠️
 
 Visual Studio Code
