@@ -1,0 +1,15 @@
+h1 {
+    text-align: center;
+    color: blue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+.custom-badge {
+    font-size: 200px;
+  }
+
+.counter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
