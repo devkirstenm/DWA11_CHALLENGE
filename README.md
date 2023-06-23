@@ -62,4 +62,4 @@ Visual Studio Code
 
 ## Credits 👏
 
-Challenge provided by provided by [Codespace](https://www.codespace.co.za/) as part of the Dynamic Web Apps Module (DWA_11: Functional Programming)
+Challenge provided by [Codespace](https://www.codespace.co.za/) as part of the Dynamic Web Apps Module (DWA_11: Functional Programming)
